@@ -2,6 +2,7 @@
 name = "nor"
 version = "1.0.0"
 edition = "2021"
+authors = ["Skub" , "Neko"]
 description = "A Very Simple To Use Encryption Algorithm * Not Ment For Professional Use"
 license = "MIT"
 
