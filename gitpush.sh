@@ -1,4 +1,4 @@
 git add .
 git commit
 
-git push s_nor master
+git push --force-with-lease s_nor master
