@@ -4,7 +4,7 @@ use std::{
 };
 
 
-pub fn encrypt(file: &str, passwd: &str) -> Vec<u8> {
+pub fn encrypt(file: &str) -> Vec<u8> {
     //println!("{}", "Please Give The File To Be Encrypted!".bold().blue());
     //print!("> ");
     //stdout().flush().unwrap();
@@ -15,12 +15,6 @@ pub fn encrypt(file: &str, passwd: &str) -> Vec<u8> {
     let mut readcntnt = Vec::new();
     openf.read_to_end(&mut readcntnt).unwrap();
     let mut mapd = String::new();
-    let pwd = (passwd.to_owned() + "-_-".to_string().as_str() + "|||")
-        .as_bytes()
-        .to_vec();
-    let bindd = String::from_utf8(pwd).unwrap();
-    let pwd = bindd.trim();
-    mapd.push_str(pwd);
     for curc in readcntnt {
         #[allow(unreachable_patterns)]
         match curc {
@@ -387,7 +381,7 @@ pub fn encrypt(file: &str, passwd: &str) -> Vec<u8> {
     //println!("{}", mapd);
 }
 
-pub fn decrypt(file: &str, expected_password: &str) -> Vec<u8> {
+pub fn decrypt(file: &str) -> Vec<u8> {
     let mut decrypted_data: Vec<u8> = Vec::new();
     let encrypted_file = file.trim().trim_matches('\"').trim_matches('\'');
     let mut openf = File::open(encrypted_file).unwrap();
@@ -399,12 +393,7 @@ pub fn decrypt(file: &str, expected_password: &str) -> Vec<u8> {
     let passworrd = parts.next().unwrap_or(&[]);
     let passworrd = String::from_utf8_lossy(passworrd);
     let mut passwordndencdat = passworrd.split("-_-");
-    let password = passwordndencdat.next().unwrap_or("").trim();
     let encrypted_data = passwordndencdat.next().unwrap_or("").trim().as_bytes();
-    if password == expected_password {
-    } else {
-        return "1".as_bytes().to_vec();
-    }
     //let encrypted_data = parts.next().unwrap_or(&[]);
     for chunk in encrypted_data.chunks(3) {
         if let [first, second, third] = chunk {
@@ -778,12 +767,12 @@ mod tests {
 
     #[test]
     fn tst_en() {
-        let encdat = encrypt("./tst_enc.txt", "TSTSTTS");
+        let encdat = encrypt("./tst_enc.txt");
         println!("{:?}",encdat);
     }
     #[test]
     fn tst_den() {
-        let dencdat = decrypt("./1_dec_tst.neko", "TSTSTTS");
+        let dencdat = decrypt("./1_dec_tst.neko");
         if dencdat == 1.to_string().as_bytes().to_vec(){
             println!("EERRR");
         }
