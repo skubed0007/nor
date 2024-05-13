@@ -1,3 +1,4 @@
+git fetch nor master
 git add .
 git commit
 
