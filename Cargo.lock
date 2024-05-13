@@ -264,7 +264,7 @@ dependencies = [
 
 [[package]]
 name = "s_nor"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "clearscreen",
  "colored",
